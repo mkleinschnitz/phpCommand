@@ -19,9 +19,9 @@ use phpCommand\Token;
 interface Executable
 {
     /**
-     * @param mixed|Token $token
+     * @param mixed|Token $token [optional]
      *
      * @return void
      */
-    public function execute($token);
+    public function execute($token = null);
 }

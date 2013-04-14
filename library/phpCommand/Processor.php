@@ -16,7 +16,7 @@ use phpCommand\Command\Executable;
  * @copyright Michael Kleinschnitz (mail@kleinschnitz.de)
  *
  */
-class Processor
+class Processor implements Executable
 {
     /**
      * @var Token
@@ -26,17 +26,25 @@ class Processor
     /**
      * @var Command\Executable[]
      */
-    private $commands;
+    private $commands = array();
 
     /**
-     * @param Token $token
+     * @param Token $token [optional]
      */
     public function __construct(Token $token = null)
     {
-        if (null === $token) {
-            $this->token = new Token();
-        } else {
+        $this->setTokenIfRightInstanceOrNewInstance($token);
+    }
+
+    /**
+     * @param Token $token [optional]
+     */
+    private function setTokenIfRightInstanceOrNewInstance(Token $token = null)
+    {
+        if ($token instanceof Token) {
             $this->token = $token;
+        } else {
+            $this->token = new Token();
         }
     }
 
@@ -52,7 +60,6 @@ class Processor
     }
 
     /**
-     *
      * @return Command\Executable[]
      */
     public function getCommands()
@@ -61,9 +68,20 @@ class Processor
     }
 
     /**
+     * @param mixed|Token $token [optional]
      *
+     * @return void
      */
-    public function execute()
+    public function execute($token = null)
+    {
+        $this->setTokenIfRightInstanceOrNewInstance($token);
+        $this->executeCommands();
+    }
+
+    /**
+     * @return void
+     */
+    private function executeCommands()
     {
         foreach ($this->commands as $command) {
             $command->execute($this->token);
