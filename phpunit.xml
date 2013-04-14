@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+    backupGlobals = "false"
+    backupStaticAttributes = "false"
+    colors = "true"
+    convertErrorsToExceptions = "true"
+    convertNoticesToExceptions = "true"
+    convertWarningsToExceptions = "true"
+    processIsolation = "false"
+    stopOnFailure = "false"
+    syntaxCheck = "true"
+    verbose="true"
+    bootstrap="./tests/bootstrap.php">
+
+    <testsuites>
+        <testsuite name="test suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <ini name="max_execution_time" value="0"/>
+        <ini name="error_log" value="phpunit.log"/>
+    </php>
+
+    <logging>
+        <!--<log type="coverage-html" target="./coverage" charset="UTF-8" />-->
+        <!--<log type="coverage-clover" target="./coverage/coverage.xml"/>-->
+    </logging>
+</phpunit>
