@@ -19,9 +19,14 @@ use phpCommand\Command\Executable;
 class Processor implements Executable
 {
     /**
-     * @var Token
+     * @var string
      */
-    private $token;
+    const KEEP_TOKEN = 'keepToken';
+
+    /**
+     * @var mixed
+     */
+    private $token = null;
 
     /**
      * @var Command\Executable[]
@@ -29,22 +34,20 @@ class Processor implements Executable
     private $commands = array();
 
     /**
-     * @param Token $token [optional]
+     * @param mixed $token [optional]
      */
-    public function __construct(Token $token = null)
+    public function __construct($token = self::KEEP_TOKEN)
     {
         $this->setTokenIfRightInstanceOrNewInstance($token);
     }
 
     /**
-     * @param Token $token [optional]
+     * @param mixed $token
      */
-    private function setTokenIfRightInstanceOrNewInstance(Token $token = null)
+    private function setTokenIfRightInstanceOrNewInstance($token)
     {
-        if ($token instanceof Token) {
+        if ($token !== self::KEEP_TOKEN) {
             $this->token = $token;
-        } else {
-            $this->token = new Token();
         }
     }
 
@@ -72,7 +75,7 @@ class Processor implements Executable
      *
      * @return void
      */
-    public function execute($token = null)
+    public function execute($token = self::KEEP_TOKEN)
     {
         $this->setTokenIfRightInstanceOrNewInstance($token);
         $this->executeCommands();
