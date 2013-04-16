@@ -1,4 +1,8 @@
 {
+    "name": "phpCommand",
+    "description": "Uses the command pattern to execute business logic",
+    "keywords": ["business logic", "command"],
+    "homepage": "http://www.kleinschnitz.de",
     "require": {},
     "autoload": {
         "psr-0": {
